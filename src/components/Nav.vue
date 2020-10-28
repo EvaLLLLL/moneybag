@@ -27,10 +27,10 @@
 <style lang="scss">
 	@import "../assets/styles/helper";
 	nav {
+		@extend %outerShadow;
 		display: flex;
 		justify-content: space-between;
 		> .item {
-			@extend %outerShadow;
 			width: 33.3333%;
 			display: flex;
 			flex-direction: column;
