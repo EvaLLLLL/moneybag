@@ -1,8 +1,6 @@
 <template>
 	<div id="app">
 		<router-view/>
-		<hr>
-		<Nav/>
 	</div>
 </template>
 
@@ -11,16 +9,14 @@
 </style>
 
 <script>
-	import Nav from '@/components/Nav'
-	
 	export default {
-		components: {Nav}
+		name: 'App'
 	}
 </script>
 
 <style lang="scss">
-	@import './assets/style/reset.scss';
-	@import './assets/style/helper.scss';
+	@import 'assets/styles/reset.scss';
+	@import 'assets/styles/helper.scss';
 	
 	body {
 		background: #f5f5f5;
