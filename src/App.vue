@@ -1,36 +1,39 @@
 <template>
-  <div id="app">
-    <router-view/>
-    <hr>
-    <Nav/>
-  </div>
+	<div id="app">
+		<router-view/>
+		<hr>
+		<Nav/>
+	</div>
 </template>
 
 <style lang="scss">
-	#app {
-		font-family: Avenir, Helvetica, Arial, sans-serif;
+
+</style>
+
+<script>
+	import Nav from '@/components/Nav'
+	
+	export default {
+		components: {Nav}
+	}
+</script>
+
+<style lang="scss">
+	@import './assets/style/reset.scss';
+	@import './assets/style/helper.scss';
+	
+	body {
+		background: #f5f5f5;
+		line-height: 1.5;
+		font-family: $font-hei;
+		font-size: 16px;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		text-align: center;
-		color: #2c3e50;
+		color: #333;
 	}
 	
-	#nav {
-		padding: 30px;
-		
-		a {
-			font-weight: bold;
-			color: #2c3e50;
-			
-			&.router-link-exact-active {
-				color: #42b983;
-			}
-		}
+	#app {
+		max-width: 500px;
+		margin: 0 auto;
 	}
 </style>
-<script>
-  import Nav from '@/components/Nav'
-  export default {
-    components: {Nav}
-  }
-</script>
