@@ -5,9 +5,7 @@
 </template>
 
 <script lang="ts">
-	import { Vue } from 'vue-property-decorator';
-	
-	export default class Labels extends Vue {
-	
-	}
+	export default {
+		name: 'Labels'
+	};
 </script>

@@ -5,9 +5,8 @@
 </template>
 
 <script lang="ts">
-	import { Vue } from 'vue-property-decorator';
-	
-	export default class NotFound extends Vue {
-	
-	}
+	export default {
+		name: 'NotFound'
+	};
+
 </script>
