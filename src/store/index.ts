@@ -58,7 +58,6 @@ const store = new Vuex.Store({
 		createRecord(state, newRecord: RecordItem) {
 			const id = createId().toString();
 			const record = {...newRecord, createdAt: (new Date).toISOString(), id: id};
-			
 			state.recordList.push(record);
 			store.commit('saveRecord');
 		},

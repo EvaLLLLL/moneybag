@@ -1,6 +1,5 @@
 <template>
 	<LayOut>
-		{{record}}
 		<div class="money-wrapper">
 			<TagsArea :selected-tags="record.selectedTags"
 			          @update:value="record.selectedTags = $event"/>
@@ -9,7 +8,8 @@
 			<Category :category="record.category"
 			          @update:value="record.category = $event"/>
 			<NumberPad :amount="record.amount"
-			           @update:value="record.amount = $event"/>
+			           @update:value="record.amount = $event"
+			           @submit="createRecord"/>
 		</div>
 	</LayOut>
 </template>
@@ -19,7 +19,7 @@
 	import TagsArea from '@/components/money/TagsArea.vue';
 	import Notes from '@/components/money/Notes.vue';
 	import Category from '@/components/money/Category.vue';
-	import {Vue, Component} from 'vue-property-decorator';
+	import {Vue, Component, Emit} from 'vue-property-decorator';
 	
 	@Component({
 		components: {Notes, TagsArea, NumberPad, Category}
@@ -31,6 +31,12 @@
 			category: '-',
 			amount: 0
 		};
+		
+		@Emit()
+		createRecord() {
+			this.$store.commit('createRecord', this.record)
+		}
+		
 	}
 </script>
 

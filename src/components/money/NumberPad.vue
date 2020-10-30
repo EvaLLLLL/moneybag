@@ -15,7 +15,7 @@
 			<button>7</button>
 			<button>8</button>
 			<button>9</button>
-			<button class="ok">保存</button>
+			<button class="ok" @click="onsubmit">保存</button>
 			<button class="zero">0</button>
 			<button class="dot">.</button>
 		</div>
@@ -38,6 +38,9 @@
 			const input = button.textContent as string;
 			this.output = inputHandle(input, this.output) || '0';
 			this.$emit('update:value', parseFloat(this.output))
+		}
+		onsubmit(){
+			this.$emit('submit')
 		}
 	}
 </script>
