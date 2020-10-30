@@ -1,18 +1,34 @@
 <template>
 	<div class="category">
-		<div class="expend">
+		<div class="expend"
+		     @click="toggleCategory"
+		     :class="{selected: this.category === '-'}">
 			<span>支出</span>
 		</div>
-		<div class="income">
-			<span class="income">收入</span>
+		<div class="income"
+		     @click="toggleCategory"
+		     :class="{selected: this.category === '+'}">
+			<span>收入</span>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-	export default {
-		name: 'Category'
-	};
+	import {Vue, Component, Emit} from 'vue-property-decorator';
+	
+	@Component
+	export default class Category extends Vue {
+		category = '-';
+		
+		@Emit()
+		toggleCategory(){
+			if (this.category === '-') {
+				this.category = '+'
+			} else {
+				this.category = '-'
+			}
+		}
+	}
 </script>
 
 <style lang="scss">
@@ -32,14 +48,16 @@
 				top: 50%;
 				transform: translate(-50%, -50%);
 			}
-			&.expend {
+			&.selected {
 				position: relative;
+				color: green;
+				font-weight: bold;
 				&::after {
 					content: '';
 					width: 100%;
 					height: 4px;
 					display: block;
-					background: #333;
+					background: green;
 					position: absolute;
 					bottom: 0;
 				}
