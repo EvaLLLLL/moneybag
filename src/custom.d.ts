@@ -1,4 +1,9 @@
 type RootState = {
-	tagList: string[];
-	selectedTags: string[];
+	tagList: Tag[];
+	selectedTags: Tag[];
+}
+
+type Tag = {
+	id: string;
+	tagName: string;
 }

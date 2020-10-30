@@ -3,10 +3,10 @@
 		{{selectedTags}}
 		<div class="tags">
 			<ul>
-				<li v-for="tag in tagList" :key="tag"
-				    :class="{selected: selectedTags.indexOf(tag)>=0}"
-				    @click="changeSelected(tag)">
-					{{tag}}
+				<li v-for="tag in tagList" :key="tag.id"
+				    :class="{selected: selectedTags.indexOf(tag.tagName)>=0}"
+				    @click="changeSelected(tag.tagName)">
+					{{tag.tagName}}
 				</li>
 			</ul>
 		</div>
