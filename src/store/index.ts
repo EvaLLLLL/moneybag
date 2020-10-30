@@ -8,7 +8,9 @@ const store = new Vuex.Store({
 	state: {
 		tagList: [],
 		selectedTags: [],
-		note: ''
+		note: '',
+		output: '0',
+		recordList: []
 	} as RootState,
 	mutations: {
 		fetchTag(state) {
@@ -46,6 +48,22 @@ const store = new Vuex.Store({
 			} else {
 				state.selectedTags.push(tag);
 			}
+		},
+		fetchRecordList(state) {
+			state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+			if (!state.recordList || state.recordList.length === 0) {
+				window.localStorage.setItem('recordList', '[]');
+			}
+		},
+		createRecord(state, newRecord: RecordItem) {
+			const id = createId().toString();
+			const record = {...newRecord, createdAt: (new Date).toISOString(), id: id};
+			
+			state.recordList.push(record);
+			store.commit('saveRecord');
+		},
+		saveRecord(state) {
+			window.localStorage.setItem('recordList', JSON.stringify(state.recordList));
 		}
 	},
 	actions: {},

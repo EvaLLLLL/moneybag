@@ -1,13 +1,17 @@
 <template>
 	<div class="output">
-		<span>100</span>
+		<span>{{output}}</span>
 	</div>
 </template>
 
 <script lang="ts">
-	export default {
-		name: 'OutPut'
-	};
+	import {Vue, Component, Prop} from 'vue-property-decorator';
+	
+	@Component
+	export default class OutPut extends Vue {
+		@Prop(String)
+		output = '0';
+	}
 </script>
 
 <style lang="scss">
