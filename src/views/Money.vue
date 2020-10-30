@@ -4,7 +4,8 @@
 		<div class="money-wrapper">
 			<TagsArea :selected-tags="record.selectedTags"
 			          @update:value="record.selectedTags = $event"/>
-			<Notes/>
+			<Notes :note="record.note"
+			       @update:value="record.note = $event"/>
 			<Category/>
 			<NumberPad/>
 		</div>

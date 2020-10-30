@@ -2,17 +2,26 @@
 	<div class="notes">
 		<label>
 			<span>备注</span>
-			<input type="text" placeholder="点击添加备注" v-model="note"/>
+			<input type="text"
+			       placeholder="点击添加备注"
+			       :value="note"
+			       @input="onChange($event.target.value)"/>
 		</label>
 	</div>
 </template>
 
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator';
+	import {Vue, Component, Prop, Emit} from 'vue-property-decorator';
 	
 	@Component
 	export default class Notes extends Vue {
-		note = '';
+		@Prop(String)
+		note: string;
+	
+		@Emit()
+		onChange(value: string){
+			this.$emit('update:value', value)
+		}
 	}
 </script>
 
