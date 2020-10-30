@@ -1,6 +1,9 @@
 <template>
 	<div class="number-pad">
-		<div class="numbers">
+		<div class="output">
+			<span>{{output}}</span>
+		</div>
+		<div class="numbers" @click="inputContent">
 			<button>1</button>
 			<button>2</button>
 			<button>3</button>
@@ -13,27 +16,49 @@
 			<button>8</button>
 			<button>9</button>
 			<button class="ok">保存</button>
-			<button>0</button>
+			<button class="zero">0</button>
 			<button class="dot">.</button>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator';
+	import {Vue, Component, Emit} from 'vue-property-decorator';
+	import {inputHandle} from '@/lib/inputHandle';
 	
 	@Component
-	export default class NumberPad extends Vue{
-	
+	export default class NumberPad extends Vue {
+		output = '0';
+		
+		@Emit()
+		inputContent(event: MouseEvent) {
+			const button = event.target as HTMLButtonElement;
+			const input = button.textContent as string;
+			this.output = inputHandle(input, this.output) || '0'
+		}
 	}
 </script>
 
 <style lang="scss">
+	@import "src/assets/styles/helper";
+	
 	.number-pad {
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-rows: 20% 80%;
+		> .output {
+			box-shadow: inset 0px -2px 3px rgba(0, 0, 0, 0.25);
+			position: relative;
+			> span {
+				position: absolute;
+				right: 16px;
+				top: 50%;
+				transform: translateY(-50%);
+				font-family: monospace;
+				font-size: 36px;
+			}
+		}
 		> .numbers {
+			@extend %clearFix;
 			height: 100%;
 			> button {
 				font-size: 18px;
@@ -44,7 +69,7 @@
 					float: right;
 					height: 50%;
 				}
-				&.dot {
+				&.zero {
 					width: 50%;
 				}
 				$bg: #f5f5f5;
