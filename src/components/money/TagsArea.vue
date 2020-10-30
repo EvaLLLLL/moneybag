@@ -21,6 +21,7 @@
 	export default class TagsArea extends Vue {
 		mounted() {
 			this.$store.commit('fetchTag');
+			this.$store.commit('fetchSelectedTags')
 		}
 		
 		get tagList() {
@@ -33,14 +34,8 @@
 		
 		@Emit()
 		changeSelected(tag: string) {
-			if (this.selectedTags.indexOf(tag) >= 0) {
-				const index = this.selectedTags.indexOf(tag);
-				this.selectedTags.splice(index, 1);
-			} else {
-				this.selectedTags.push(tag);
-			}
+			this.$store.commit('changeTagsSelected', tag)
 		}
-		
 	}
 </script>
 

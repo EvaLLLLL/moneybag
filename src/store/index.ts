@@ -20,6 +20,20 @@ export default new Vuex.Store({
 				];
 				window.localStorage.setItem('tagList', JSON.stringify(defaultTagList));
 			}
+		},
+		fetchSelectedTags(state){
+			state.selectedTags = JSON.parse(window.localStorage.getItem('selectedTags') || '[]');
+			if(!state.selectedTags || state.selectedTags.length === 0) {
+				window.localStorage.setItem('selectedTags', '[]')
+			}
+		},
+		changeTagsSelected(state, tag){
+			if (state.selectedTags.indexOf(tag) >= 0) {
+				const index = state.selectedTags.indexOf(tag);
+				state.selectedTags.splice(index, 1);
+			} else {
+				state.selectedTags.push(tag);
+			}
 		}
 	},
 	actions: {},
