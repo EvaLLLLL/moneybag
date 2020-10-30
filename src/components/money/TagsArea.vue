@@ -3,8 +3,8 @@
 		<div class="tags">
 			<ul>
 				<li v-for="tag in tagList" :key="tag.id"
-				    :class="{selected: selectedTags.indexOf(tag.tagName)>=0}"
-				    @click="changeSelected(tag.tagName)">
+				    :class="{selected: selectedTags.indexOf(tag)>=0}"
+				    @click="changeSelected(tag)">
 					{{tag.tagName}}
 				</li>
 			</ul>
@@ -16,26 +16,19 @@
 </template>
 
 <script lang="ts">
-	import {Vue, Component, Emit} from 'vue-property-decorator';
+	import {Vue, Component, Emit, Prop} from 'vue-property-decorator';
 	
 	@Component
 	export default class TagsArea extends Vue {
+		@Prop(Array)
+		selectedTags: array;
+		
 		mounted() {
 			this.$store.commit('fetchTag');
-			this.$store.commit('fetchSelectedTags');
 		}
 		
 		get tagList() {
 			return this.$store.state.tagList;
-		}
-		
-		get selectedTags() {
-			return this.$store.state.selectedTags;
-		}
-		
-		@Emit()
-		changeSelected(tag: string) {
-			this.$store.commit('changeTagsSelected', tag);
 		}
 		
 		@Emit()
@@ -46,6 +39,17 @@
 			} else {
 				this.$store.commit('createTag', newTagName);
 			}
+		}
+		
+		@Emit()
+		changeSelected(tag: { id: string; tagName: string }) {
+			const index = this.selectedTags.indexOf(tag);
+			if (index >= 0) {
+				this.selectedTags.splice(index, 1);
+			} else {
+				this.selectedTags.push(tag);
+			}
+			this.$emit('update:value', this.selectedTags);
 		}
 	}
 </script>

@@ -1,7 +1,9 @@
 <template>
 	<LayOut>
+		{{record}}
 		<div class="money-wrapper">
-			<TagsArea/>
+			<TagsArea :selected-tags="record.selectedTags"
+			          @update:value="record.selectedTags = $event"/>
 			<Notes/>
 			<Category/>
 			<NumberPad/>
@@ -14,11 +16,19 @@
 	import TagsArea from '@/components/money/TagsArea.vue';
 	import Notes from '@/components/money/Notes.vue';
 	import Category from '@/components/money/Category.vue';
+	import {Vue, Component} from 'vue-property-decorator';
 	
-	export default {
-		name: 'Money',
+	@Component({
 		components: {Notes, TagsArea, NumberPad, Category}
-	};
+	})
+	export default class Money extends Vue {
+		record: RecordItem = {
+			selectedTags: [],
+			note: '',
+			category: '-',
+			amount: 0
+		};
+	}
 </script>
 
 <style lang="scss">
