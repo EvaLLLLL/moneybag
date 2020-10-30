@@ -7,7 +7,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
 	state: {
 		tagList: [],
-		selectedTags: []
+		selectedTags: [],
+		note: ''
 	} as RootState,
 	mutations: {
 		fetchTag(state) {
@@ -27,7 +28,7 @@ const store = new Vuex.Store({
 			const id = createId().toString();
 			state.tagList.push({id, tagName});
 			store.commit('saveTags');
-			window.alert('创建成功')
+			window.alert('创建成功');
 		},
 		saveTags(state) {
 			window.localStorage.setItem('tagList', JSON.stringify(state.tagList));

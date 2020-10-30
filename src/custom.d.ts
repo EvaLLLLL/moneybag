@@ -1,6 +1,7 @@
 type RootState = {
 	tagList: Tag[];
 	selectedTags: Tag[];
+	note: string;
 }
 
 type Tag = {

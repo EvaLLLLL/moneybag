@@ -2,15 +2,18 @@
 	<div class="notes">
 		<label>
 			<span>备注</span>
-			<input type="text" placeholder="点击添加备注"/>
+			<input type="text" placeholder="点击添加备注" v-model="note"/>
 		</label>
 	</div>
 </template>
 
 <script lang="ts">
-	export default {
-		name: 'Notes'
-	};
+	import {Vue, Component} from 'vue-property-decorator';
+	
+	@Component
+	export default class Notes extends Vue {
+		note = '';
+	}
 </script>
 
 <style lang="scss">
