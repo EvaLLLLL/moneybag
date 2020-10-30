@@ -1,6 +1,5 @@
 <template>
 	<div class="tags-area">
-		{{selectedTags}}
 		<div class="tags">
 			<ul>
 				<li v-for="tag in tagList" :key="tag.id"
@@ -10,7 +9,9 @@
 				</li>
 			</ul>
 		</div>
-		<button class="add-tag">新增标签</button>
+		<button class="add-tag"
+		        @click="addTag">新增标签
+		</button>
 	</div>
 </template>
 
@@ -21,7 +22,7 @@
 	export default class TagsArea extends Vue {
 		mounted() {
 			this.$store.commit('fetchTag');
-			this.$store.commit('fetchSelectedTags')
+			this.$store.commit('fetchSelectedTags');
 		}
 		
 		get tagList() {
@@ -34,7 +35,17 @@
 		
 		@Emit()
 		changeSelected(tag: string) {
-			this.$store.commit('changeTagsSelected', tag)
+			this.$store.commit('changeTagsSelected', tag);
+		}
+		
+		@Emit()
+		addTag() {
+			const newTagName = window.prompt('请输入要添加的标签名');
+			if (!newTagName) {
+				window.alert('标签名不能为空！');
+			} else {
+				this.$store.commit('createTag', newTagName);
+			}
 		}
 	}
 </script>
