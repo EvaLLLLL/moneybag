@@ -8,7 +8,8 @@
 			       @update:value="record.note = $event"/>
 			<Category :category="record.category"
 			          @update:value="record.category = $event"/>
-			<NumberPad/>
+			<NumberPad :amount="record.amount"
+			           @update:value="record.amount = $event"/>
 		</div>
 	</LayOut>
 </template>

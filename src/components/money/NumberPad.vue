@@ -23,18 +23,21 @@
 </template>
 
 <script lang="ts">
-	import {Vue, Component, Emit} from 'vue-property-decorator';
+	import {Vue, Component, Emit, Prop} from 'vue-property-decorator';
 	import {inputHandle} from '@/lib/inputHandle';
 	
 	@Component
 	export default class NumberPad extends Vue {
-		output = '0';
+		@Prop(Number) amount!: number;
+		
+		output = this.amount.toString()
 		
 		@Emit()
 		inputContent(event: MouseEvent) {
 			const button = event.target as HTMLButtonElement;
 			const input = button.textContent as string;
-			this.output = inputHandle(input, this.output) || '0'
+			this.output = inputHandle(input, this.output) || '0';
+			this.$emit('update:value', parseFloat(this.output))
 		}
 	}
 </script>
