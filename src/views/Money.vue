@@ -6,7 +6,8 @@
 			          @update:value="record.selectedTags = $event"/>
 			<Notes :note="record.note"
 			       @update:value="record.note = $event"/>
-			<Category/>
+			<Category :category="record.category"
+			          @update:value="record.category = $event"/>
 			<NumberPad/>
 		</div>
 	</LayOut>

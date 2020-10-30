@@ -15,8 +15,7 @@
 	
 	@Component
 	export default class Notes extends Vue {
-		@Prop(String)
-		note: string;
+		@Prop(String) note!: string
 	
 		@Emit()
 		onChange(value: string){

@@ -20,8 +20,7 @@
 	
 	@Component
 	export default class TagsArea extends Vue {
-		@Prop(Array)
-		selectedTags: array;
+		@Prop(Array) selectedTags!: array;
 		
 		mounted() {
 			this.$store.commit('fetchTag');
