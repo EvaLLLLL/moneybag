@@ -1,22 +1,46 @@
 <template>
 	<div class="tags-area">
+		{{selectedTags}}
 		<div class="tags">
 			<ul>
-				<li>衣</li>
-				<li>食</li>
-				<li>住</li>
-				<li>行</li>
-				<li>酒店</li>
-				<li>门票</li>
+				<li v-for="tag in tagList" :key="tag"
+				    :class="{selected: selectedTags.indexOf(tag)>=0}"
+				    @click="changeSelected(tag)">
+					{{tag}}
+				</li>
 			</ul>
 		</div>
-		<span class="add-tag">新增标签</span>
+		<button class="add-tag">新增标签</button>
 	</div>
 </template>
 
 <script lang="ts">
-	export default {
-		name: 'TagsArea'
+	import {Vue, Component, Emit} from 'vue-property-decorator';
+	
+	@Component
+	export default class TagsArea extends Vue {
+		mounted() {
+			this.$store.commit('fetchTag');
+		}
+		
+		get tagList() {
+			return this.$store.state.tagList;
+		}
+		
+		get selectedTags() {
+			return this.$store.state.selectedTags;
+		}
+		
+		@Emit()
+		changeSelected(tag: string) {
+			if (this.selectedTags.indexOf(tag) >= 0) {
+				const index = this.selectedTags.indexOf(tag);
+				this.selectedTags.splice(index, 1);
+			} else {
+				this.selectedTags.push(tag);
+			}
+		}
+		
 	}
 </script>
 
@@ -46,6 +70,11 @@
 					border-radius: 18px;
 					font-size: 14px;
 					margin: 5px 5px 0 5px;
+					&.selected {
+						background: green;
+						color: white;
+						font-weight: bold;
+					}
 				}
 			}
 		}
@@ -58,6 +87,7 @@
 			font-weight: bold;
 			color: #999;
 			border-bottom: 1px solid #999;
+			background: transparent;
 		}
 	}
 </style>
