@@ -1,7 +1,9 @@
 <template>
 	<LayOut>
 		<div class="edit-title">
-			<Icon name="left" class="go-back"></Icon>
+			<Icon name="left"
+			      class="go-back"
+			      @click="goBack"></Icon>
 			<span>编辑标签</span>
 			<Icon name="right" class="right"></Icon>
 		</div>
@@ -16,11 +18,16 @@
 </template>
 
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator';
+	import {Vue, Component, Emit} from 'vue-property-decorator';
+	import router from '@/router';
 	
 	@Component
 	export default class EditLabel extends Vue {
-	
+		
+		@Emit()
+		goBack() {
+			router.back();
+		}
 	}
 </script>
 
