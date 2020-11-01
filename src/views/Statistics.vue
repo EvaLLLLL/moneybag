@@ -11,9 +11,7 @@
 					<div class="item"
 					     v-for="record in recordList"
 					     :key="record.tagName">
-						<span class="tag-name"
-						      v-for="tag in record.selectedTags"
-						      :key="tag.id">{{tag.tagName}},</span>
+						<span class="tag-name">{{tagString(record.selectedTags)}}</span>
 						<span class="note">{{record.note}}</span>
 						<span class="amount">￥{{record.amount}}</span>
 					</div>
@@ -33,11 +31,19 @@
 	export default class Statistics extends Vue {
 		mounted() {
 			this.$store.commit('fetchRecordList');
-			console.log(this.recordList);
+			console.log(this.recordList)
 		}
 		
 		get recordList() {
 			return this.$store.state.recordList;
+		}
+		
+		tagString(selectedTags: Tag[]) {
+			if(selectedTags.length === 0) {
+				return '无标签'
+			} else {
+				return selectedTags.map(t=>t.tagName).join(',')
+			}
 		}
 	}
 </script>
@@ -69,6 +75,9 @@
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
+					> .tag-name {
+						white-space: nowrap;
+					}
 					> .note {
 						@extend %oneLine;
 						margin: 0 13px;
