@@ -10,7 +10,8 @@ const store = new Vuex.Store({
 		selectedTags: [],
 		note: '',
 		output: '0',
-		recordList: []
+		recordList: [],
+		currentTag: undefined
 	} as RootState,
 	mutations: {
 		fetchTag(state) {
@@ -63,6 +64,23 @@ const store = new Vuex.Store({
 		},
 		saveRecord(state) {
 			window.localStorage.setItem('recordList', JSON.stringify(state.recordList));
+		},
+		setCurrentTag(state, id: string) {
+			state.currentTag = state.tagList.filter(t => t.id === id)[0];
+		},
+		updateTag(state, payload: { id: string; tagName: string }) {
+			const {id, tagName} = payload;
+			const idList = state.tagList.map(item => item.id);
+			if (idList.indexOf(id) >= 0) {
+				const tagNames = state.tagList.map(item => item.tagName);
+				if (tagNames.indexOf(tagName) >= 0) {
+					window.alert(`已经创建过${tagName}标签了，请换个名称`);
+				} else {
+					const tag = state.tagList.filter(item => item.id === id)[0];
+					tag.tagName = tagName;
+					store.commit('saveTags');
+				}
+			}
 		}
 	},
 	actions: {},

@@ -9,7 +9,9 @@
 		</div>
 		<div class="tag-edit">
 			<span>标签名</span>
-			<span class="tag-name">衣服</span>
+			<input class="tag-name"
+			       :value="currentTag.tagName"
+			       @change="update($event.target.value)"/>
 		</div>
 		<div class="remove-tag">
 			<button>删除标签</button>
@@ -19,14 +21,28 @@
 
 <script lang="ts">
 	import {Vue, Component, Emit} from 'vue-property-decorator';
-	import router from '@/router';
 	
 	@Component
 	export default class EditLabel extends Vue {
+		get currentTag() {
+			return this.$store.state.currentTag;
+		}
+		
+		created() {
+			const id = this.$router.currentRoute.params.id;
+			this.$store.commit('setCurrentTag', id);
+			if (!this.currentTag) {
+				this.$router.replace('/404');
+			}
+		}
 		
 		@Emit()
 		goBack() {
-			router.back();
+			this.$router.back();
+		}
+		
+		update(newTagName: string) {
+			this.$store.commit('updateTag', {id: this.currentTag.id, tagName: newTagName});
 		}
 	}
 </script>
@@ -48,9 +64,19 @@
 		background: white;
 		display: flex;
 		align-items: center;
-		padding: 15px 16px;
+		padding: 15px 0 15px 16px;
+		position: relative;
 		> .tag-name {
+			color: #333;
 			margin-left: 12px;
+			border: 1px solid red;
+			height: 44px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 80px;
+			width: 100%;
+			right: 0;
 		}
 	}
 	.remove-tag {

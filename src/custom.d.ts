@@ -4,6 +4,7 @@ type RootState = {
 	note: string;
 	output: string;
 	recordList: RecordItem[];
+	currentTag?: Tag;
 }
 
 type Tag = {
