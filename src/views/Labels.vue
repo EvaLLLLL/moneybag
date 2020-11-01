@@ -2,23 +2,40 @@
 	<LayOut>
 		<div class="tags">
 			<div class="tag-item">
-				<div class="tag">
-					<span>衣服</span>
+				<div class="tag" v-for="item in tagList" :key="item.id">
+					<span>{{item.tagName}}</span>
 					<Icon name="right"/>
 				</div>
 			</div>
 		</div>
-			<div class="add-tag">
-				<button>新建标签</button>
-			</div>
+		<div class="add-tag" @click="addTag">
+			<button>新建标签</button>
+		</div>
 	</LayOut>
 </template>
 
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator';
+	import {Vue, Component, Emit} from 'vue-property-decorator';
 	
 	@Component
 	export default class Labels extends Vue {
+		mounted() {
+			this.$store.commit('fetchTag');
+		}
+		
+		get tagList() {
+			return this.$store.state.tagList;
+		}
+		
+		@Emit()
+		addTag() {
+			const newTagName = window.prompt('请输入要添加的标签名');
+			if (!newTagName) {
+				window.alert('标签名不能为空！');
+			} else {
+				this.$store.commit('createTag', newTagName);
+			}
+		}
 	}
 </script>
 
