@@ -2,10 +2,13 @@
 	<LayOut>
 		<div class="tags">
 			<div class="tag-item">
-				<div class="tag" v-for="item in tagList" :key="item.id">
+				<RouterLink class="tag"
+				            v-for="item in tagList"
+				            :to="`labels/edit/${item.id}`"
+				            :key="item.id">
 					<span>{{item.tagName}}</span>
 					<Icon name="right"/>
-				</div>
+				</RouterLink>
 			</div>
 		</div>
 		<div class="add-tag" @click="addTag">
