@@ -1,7 +1,7 @@
 <template>
 	<div class="tags-area">
 		<div class="tags">
-			<ul>
+			<ul ref="ulRef">
 				<li v-for="tag in tagList" :key="tag.id"
 				    :class="{selected: secTags.indexOf(tag)>=0}"
 				    @click="changeSelected(tag)">
@@ -28,6 +28,11 @@
 			this.$store.commit('fetchTag');
 		}
 		
+		updated(){
+			const ul: any = this.$refs.ulRef;
+			ul.scrollTop = 9999;
+		}
+		
 		get tagList() {
 			return this.$store.state.tagList;
 		}
@@ -35,7 +40,9 @@
 		@Emit()
 		addTag() {
 			const newTagName = window.prompt('请输入要添加的标签名');
-			if (!newTagName) {
+			if (newTagName === null) {
+				return;
+			} else if (!newTagName) {
 				window.alert('标签名不能为空！');
 			} else {
 				this.$store.commit('createTag', newTagName);
@@ -71,8 +78,8 @@
 			flex-direction: column;
 			justify-content: flex-end;
 			> ul {
-				overflow: scroll;
 				display: flex;
+				overflow: scroll;
 				flex-direction: row;
 				flex-wrap: wrap;
 				> li {

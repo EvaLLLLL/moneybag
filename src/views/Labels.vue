@@ -33,7 +33,9 @@
 		@Emit()
 		addTag() {
 			const newTagName = window.prompt('请输入要添加的标签名');
-			if (!newTagName) {
+			if (newTagName === null) {
+				return;
+			} else if (!newTagName) {
 				window.alert('标签名不能为空！');
 			} else {
 				this.$store.commit('createTag', newTagName);
@@ -44,7 +46,7 @@
 
 <style lang="scss">
 	.tags {
-		max-height: 80%;
+		max-height: 85%;
 		overflow: scroll;
 	}
 	.tag-item {
@@ -59,7 +61,7 @@
 		}
 	}
 	.add-tag {
-		margin-top: 44px;
+		margin-top: 30px;
 		text-align: center;
 		> button {
 			padding: 6px 12px;

@@ -116,6 +116,7 @@
 		}
 		> .items-wrapper {
 			height: 100%;
+			overflow: scroll;
 			> .items-date {
 				> .date-and-amount {
 					padding: 9px 16px;

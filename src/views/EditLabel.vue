@@ -69,7 +69,6 @@
 		> .tag-name {
 			color: #333;
 			margin-left: 12px;
-			border: 1px solid red;
 			height: 44px;
 			position: absolute;
 			top: 0;

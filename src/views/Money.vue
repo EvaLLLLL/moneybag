@@ -34,7 +34,17 @@
 		
 		@Emit()
 		createRecord() {
-			this.$store.commit('createRecord', this.record)
+			if (this.record.amount !== 0) {
+				this.$store.commit('createRecord', this.record);
+				this.record = {
+					selectedTags: [],
+					note: '',
+					category: '-',
+					amount: 0
+				}
+			} else {
+				window.alert('金额不能为0');
+			}
 		}
 	}
 </script>
