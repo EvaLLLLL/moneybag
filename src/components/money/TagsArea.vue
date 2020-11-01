@@ -83,6 +83,7 @@
 				flex-direction: row;
 				flex-wrap: wrap;
 				> li {
+					cursor: pointer;
 					background: #D9D9D9;
 					padding: 0 18px;
 					border-radius: 18px;
@@ -97,6 +98,7 @@
 			}
 		}
 		> .add-tag {
+			cursor: pointer;
 			padding: 0 2px;
 			position: absolute;
 			left: 20px;

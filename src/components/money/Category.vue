@@ -36,6 +36,7 @@
 
 <style lang="scss" scoped>
 	.category {
+		cursor: pointer;
 		background: #c4c4c4;
 		display: flex;
 		justify-content: space-between;

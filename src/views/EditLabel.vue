@@ -65,6 +65,9 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 8px;
+		> .go-back {
+			cursor: pointer;
+		}
 		> .right {
 			color: transparent;
 		}
@@ -92,6 +95,7 @@
 		margin-top: 44px;
 		text-align: center;
 		> button {
+			cursor: pointer;
 			padding: 6px 12px;
 			border-radius: 4px;
 			background: #767676;

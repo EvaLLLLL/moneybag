@@ -64,6 +64,7 @@
 		margin-top: 30px;
 		text-align: center;
 		> button {
+			cursor: pointer;
 			padding: 6px 12px;
 			border-radius: 4px;
 			background: #767676;
