@@ -34,7 +34,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.category {
 		background: #c4c4c4;
 		display: flex;
