@@ -1,7 +1,8 @@
 <template>
 	<LayOut>
 		<div class="statistics-wrapper">
-			<Category :category="recordType"/>
+			<Category :category="recordType"
+			          @update:value="recordType = $event"/>
 			<div class="items-wrapper">
 				<div class="items-date"
 				     v-for="(group, index) in result"
@@ -76,7 +77,7 @@
 		}
 		
 		
-		beautify(string: string){
+		beautify(string: string) {
 			const day = dayjs(string);
 			const now = dayjs();
 			if (day.isSame(now, 'day')) {
