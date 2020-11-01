@@ -8,13 +8,15 @@
 			<Icon name="right" class="right"></Icon>
 		</div>
 		<div class="tag-edit">
-			<span>标签名</span>
-			<input class="tag-name"
-			       :value="currentTag.tagName"
-			       @change="update($event.target.value)"/>
+			<label>
+				<span>标签名</span>
+				<input class="tag-name"
+				       :value="currentTag.tagName"
+				       @change="update($event.target.value)"/>
+			</label>
 		</div>
 		<div class="remove-tag">
-			<button>删除标签</button>
+			<button @click="removeTag">删除标签</button>
 		</div>
 	</LayOut>
 </template>
@@ -41,8 +43,16 @@
 			this.$router.back();
 		}
 		
+		@Emit()
 		update(newTagName: string) {
 			this.$store.commit('updateTag', {id: this.currentTag.id, tagName: newTagName});
+		}
+		
+		@Emit()
+		removeTag() {
+			const id = this.$router.currentRoute.params.id;
+			this.$store.commit('removeTag', id);
+			this.$router.back();
 		}
 	}
 </script>
@@ -66,7 +76,7 @@
 		align-items: center;
 		padding: 15px 0 15px 16px;
 		position: relative;
-		> .tag-name {
+		> label > .tag-name {
 			color: #333;
 			margin-left: 12px;
 			height: 44px;

@@ -33,6 +33,12 @@ const store = new Vuex.Store({
 			state.tagList.push({id, tagName});
 			store.commit('saveTags');
 		},
+		removeTag(state, id: string) {
+			const tag = state.tagList.filter(t => t.id === id)[0];
+			const index = state.tagList.indexOf(tag);
+			state.tagList.splice(index, 1);
+			store.commit('saveTags');
+		},
 		saveTags(state) {
 			window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
 		},
