@@ -1,42 +1,21 @@
 <template>
 	<LayOut>
 		<div class="statistics-wrapper">
-			<Category category="+"/>
+			<Category category="-"/>
 			<div class="items-wrapper">
 				<div class="items-date">
 					<div class="date-and-amount">
 						<span class="date">今天</span>
 						<span class="amount">￥124</span>
 					</div>
-					<div class="item">
-						<span class="tag-name">tagName</span>
-						<span class="note">notenotenotenotenotenotenotenotenotenotenotenote</span>
-						<span class="amount">￥amount</span>
-					</div>
-					<div class="item">
-						<span class="tag-name">tagName</span>
-						<span class="note">notenotenotenotenotenotenotenotenotenotenotenote</span>
-						<span class="amount">￥amount</span>
-					</div>
-					<div class="item">
-						<span class="tag-name">tagName</span>
-						<span class="note">notenotenotenotenotenotenotenotenotenotenotenote</span>
-						<span class="amount">￥amount</span>
-					</div>
-					<div class="item">
-						<span class="tag-name">tagName</span>
-						<span class="note">notenotenotenotenotenotenotenotenotenotenotenote</span>
-						<span class="amount">￥amount</span>
-					</div>
-					<div class="item">
-						<span class="tag-name">tagName</span>
-						<span class="note">notenotenotenotenotenotenotenotenotenotenotenote</span>
-						<span class="amount">￥amount</span>
-					</div>
-					<div class="item">
-						<span class="tag-name">tagName</span>
-						<span class="note">notenotenotenotenotenotenotenotenotenotenotenote</span>
-						<span class="amount">￥amount</span>
+					<div class="item"
+					     v-for="record in recordList"
+					     :key="record.tagName">
+						<span class="tag-name"
+						      v-for="tag in record.selectedTags"
+						      :key="tag.id">{{tag.tagName}},</span>
+						<span class="note">{{record.note}}</span>
+						<span class="amount">￥{{record.amount}}</span>
 					</div>
 				</div>
 			</div>
@@ -51,7 +30,15 @@
 	@Component({
 		components: {Category}
 	})
-	export default class Statistics extends Vue{
+	export default class Statistics extends Vue {
+		mounted() {
+			this.$store.commit('fetchRecordList');
+			console.log(this.recordList);
+		}
+		
+		get recordList() {
+			return this.$store.state.recordList;
+		}
 	}
 </script>
 

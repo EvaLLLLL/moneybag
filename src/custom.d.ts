@@ -1,6 +1,5 @@
 type RootState = {
 	tagList: Tag[];
-	selectedTags: Tag[];
 	note: string;
 	output: string;
 	recordList: RecordItem[];

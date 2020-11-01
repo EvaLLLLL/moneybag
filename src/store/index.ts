@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createId from '@/lib/createId';
+import clone from '@/lib/clone';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	state: {
 		tagList: [],
-		selectedTags: [],
 		note: '',
 		output: '0',
 		recordList: [],
@@ -36,20 +36,6 @@ const store = new Vuex.Store({
 		saveTags(state) {
 			window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
 		},
-		fetchSelectedTags(state) {
-			state.selectedTags = JSON.parse(window.localStorage.getItem('selectedTags') || '[]');
-			if (!state.selectedTags || state.selectedTags.length === 0) {
-				window.localStorage.setItem('selectedTags', '[]');
-			}
-		},
-		changeTagsSelected(state, tag) {
-			if (state.selectedTags.indexOf(tag) >= 0) {
-				const index = state.selectedTags.indexOf(tag);
-				state.selectedTags.splice(index, 1);
-			} else {
-				state.selectedTags.push(tag);
-			}
-		},
 		fetchRecordList(state) {
 			state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]');
 			if (!state.recordList || state.recordList.length === 0) {
@@ -58,8 +44,10 @@ const store = new Vuex.Store({
 		},
 		createRecord(state, newRecord: RecordItem) {
 			const id = createId().toString();
-			const record = {...newRecord, createdAt: (new Date).toISOString(), id: id};
-			state.recordList.push(record);
+			const date = (new Date()).toISOString();
+			const record = clone(newRecord)
+			const record2 = {...record, id: id, createdAt: date}
+			state.recordList.push(record2);
 			store.commit('saveRecord');
 		},
 		saveRecord(state) {

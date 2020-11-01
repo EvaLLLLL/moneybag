@@ -36,7 +36,6 @@
 		createRecord() {
 			this.$store.commit('createRecord', this.record)
 		}
-		
 	}
 </script>
 

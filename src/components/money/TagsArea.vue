@@ -3,7 +3,7 @@
 		<div class="tags">
 			<ul>
 				<li v-for="tag in tagList" :key="tag.id"
-				    :class="{selected: selectedTags.indexOf(tag)>=0}"
+				    :class="{selected: secTags.indexOf(tag)>=0}"
 				    @click="changeSelected(tag)">
 					{{tag.tagName}}
 				</li>
@@ -21,6 +21,8 @@
 	@Component
 	export default class TagsArea extends Vue {
 		@Prop(Array) selectedTags !: Tag[];
+		
+		secTags = this.selectedTags;
 		
 		mounted() {
 			this.$store.commit('fetchTag');
@@ -42,13 +44,13 @@
 		
 		@Emit()
 		changeSelected(tag: { id: string; tagName: string }) {
-			const index = this.selectedTags.indexOf(tag);
+			const index = this.secTags.indexOf(tag);
 			if (index >= 0) {
-				this.selectedTags.splice(index, 1);
+				this.secTags.splice(index, 1);
 			} else {
-				this.selectedTags.push(tag);
+				this.secTags.push(tag);
 			}
-			this.$emit('update:value', this.selectedTags);
+			this.$emit('update:value', this.secTags);
 		}
 	}
 </script>
