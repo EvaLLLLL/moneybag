@@ -77,9 +77,7 @@ const store = new Vuex.Store({
 				}
 			}
 		}
-	},
-	actions: {},
-	modules: {}
+	}
 });
 
 export default store;

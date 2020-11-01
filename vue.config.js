@@ -17,5 +17,14 @@ module.exports = {
       .use('svgo-loader').loader('svgo-loader').tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]})).end()
     config.plugin('svg-sprite').use('svg-sprite-loader/plugin', [{plainSprite: true}])
     config.module.rule('svg').exclude.add(dir) //其他 svg loader 排除 icons 目录
+  },
+  pwa: {
+    iconPaths: {
+      favicon32: 'icon.png',
+      favicon16: 'icon.png',
+      appleTouchIcon: 'icon.png',
+      maskIcon: 'icon.png',
+      msTileImage: 'icon.png'
+    }
   }
 }
