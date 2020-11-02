@@ -10,7 +10,16 @@
 
 <script>
 	export default {
-		name: 'App'
+		name: 'App',
+		mounted() {
+			if (!this.$store.state.tagList || this.$store.state.tagList.length === 0) {
+				console.log('hi')
+				this.$store.commit('createTag', '衣服')
+				this.$store.commit('createTag', '住宿')
+				this.$store.commit('createTag', '食物')
+				this.$store.commit('createTag', '出行')
+			}
+		}
 	}
 </script>
 
