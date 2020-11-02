@@ -33,8 +33,6 @@
 
 <style lang="scss">
 	.category {
-		height: 10%;
-		width: 100%;
 		cursor: pointer;
 		background: #c4c4c4;
 		display: flex;

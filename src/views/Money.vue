@@ -51,10 +51,26 @@
 <style lang="scss">
 	@import "src/assets/styles/helper.scss";
 	.money-wrapper {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 		color: #333;
-		height: 100%;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
+		> .tags-area{
+			height: 30%;
+		}
+		> .notes {
+			height: 10%;
+		}
+		> .category {
+			height: 10%;
+		}
+		> .number-pad {
+			height: 50%;
+		}
 	}
 </style>

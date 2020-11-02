@@ -23,6 +23,7 @@
 		flex-direction: column;
 		
 		> .content {
+			position: relative;
 			flex-grow: 1;
 			overflow: scroll;
 		}
