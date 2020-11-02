@@ -36,12 +36,11 @@
 		createRecord() {
 			if (this.record.amount !== 0) {
 				this.$store.commit('createRecord', this.record);
-				this.record = {
-					selectedTags: [],
-					note: '',
-					category: '-',
-					amount: 0
-				}
+				
+				this.record.selectedTags.splice(0, this.record.selectedTags.length);
+				this.record.note = '';
+				this.record.category = '-';
+				this.record.amount = 0;
 			} else {
 				window.alert('金额不能为0');
 			}

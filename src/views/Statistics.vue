@@ -38,7 +38,6 @@
 		
 		mounted() {
 			this.$store.commit('fetchRecordList');
-			console.log(this.result);
 		}
 		
 		get recordList() {
