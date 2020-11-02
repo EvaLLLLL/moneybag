@@ -2,7 +2,7 @@
 	<div class="category">
 		<div class="expend"
 		     @click="toggleCategory"
-		     :class="{selected: type === '-'}">
+		     :class="{selected: category === '-'}">
 			<span>支出</span>
 		</div>
 		<div class="income"
@@ -20,16 +20,13 @@
 	export default class Category extends Vue {
 		@Prop(String) category!: string;
 		
-		type = this.category;
-		
 		@Emit()
 		toggleCategory() {
-			if (this.type === '-') {
-				this.type = '+';
+			if (this.category === '-') {
+				this.$emit('update:value', '+');
 			} else {
-				this.type = '-';
+				this.$emit('update:value', '-');
 			}
-			this.$emit('update:value', this.type);
 		}
 	}
 </script>

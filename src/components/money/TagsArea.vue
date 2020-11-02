@@ -57,7 +57,6 @@
 			} else {
 				this.secTags.push(tag);
 			}
-			this.$emit('update:value', this.secTags);
 		}
 	}
 </script>
