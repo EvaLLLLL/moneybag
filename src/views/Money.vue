@@ -53,7 +53,8 @@
 	.money-wrapper {
 		color: #333;
 		height: 100%;
-		display: grid;
-		grid-template-rows: 30% 10% 10% 50%;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
 	}
 </style>

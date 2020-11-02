@@ -63,6 +63,7 @@
 
 <style lang="scss">
 	.tags-area {
+		height: 30%;
 		background: white;
 		width: 100%;
 		position: relative;

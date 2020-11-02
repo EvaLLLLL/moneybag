@@ -49,11 +49,13 @@
 	@import "src/assets/styles/helper";
 	
 	.number-pad {
-		display: grid;
-		grid-template-rows: 20% 80%;
+		height: 50%;
+		display: flex;
+		flex-direction: column;
 		> .output {
 			box-shadow: inset 0px -2px 3px rgba(0, 0, 0, 0.25);
 			position: relative;
+			height: 72px;
 			> span {
 				position: absolute;
 				right: 16px;
@@ -65,6 +67,7 @@
 		}
 		> .numbers {
 			@extend %clearFix;
+			flex-grow: 1;
 			height: 100%;
 			> button {
 				cursor: pointer;

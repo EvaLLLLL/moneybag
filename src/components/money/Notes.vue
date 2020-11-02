@@ -26,6 +26,7 @@
 
 <style lang="scss">
 	.notes {
+		height: 10%;
 		width: 100%;
 		background: #f5f5f5;
 		padding: 20px;
