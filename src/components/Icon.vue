@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts">
-	// import icon 文件夹
 	const importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
 	try {
 		importAll(require.context('../assets/icons', true, /\.svg$/));
